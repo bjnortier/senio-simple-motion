@@ -1,0 +1,37 @@
+{
+  "name": "senio-simple-motion",
+  "version": "1.0.0",
+  "description": "Very simple image motion detection using lwip",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint .",
+    "eslint:watch": "eslint run-script sass -- --eslint",
+    "test": "npm run eslint && jest",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjnortier/senio-simple-motion.git"
+  },
+  "keywords": [
+    "motion",
+    "detection",
+    "lwip"
+  ],
+  "author": "Ben Nortier <ben@bjnortier.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bjnortier/senio-simple-motion/issues"
+  },
+  "homepage": "https://github.com/bjnortier/senio-simple-motion#readme",
+  "dependencies": {
+    "lwip": "0.0.9"
+  },
+  "devDependencies": {
+    "async": "^2.0.1",
+    "babel-jest": "^15.0.0",
+    "babel-polyfill": "^6.13.0",
+    "eslint": "^3.6.0",
+    "jest": "^15.1.1"
+  }
+}
