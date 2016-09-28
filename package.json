@@ -2,7 +2,7 @@
   "name": "senio-simple-motion",
   "version": "1.0.0",
   "description": "Very simple image motion detection using lwip",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "eslint": "eslint .",
     "eslint:watch": "eslint run-script sass -- --eslint",
@@ -10,7 +10,9 @@
     "unit:watch": "npm run unit -- --watch",
     "functional": "mocha --compilers js:babel-register --recursive test/functional/**",
     "functional:watch": "npm run functional -- --watch",
-    "test": "npm run eslint && npm run unit && npm run functional"
+    "test": "npm run eslint && npm run unit && npm run functional",
+    "compile": "node_modules/babel-cli/bin/babel.js --optional runtime -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
