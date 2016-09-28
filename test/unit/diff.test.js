@@ -5,11 +5,14 @@ import async from 'async';
 import imageType from 'image-type';
 import expect from 'expect';
 import prettyHrtime from 'pretty-hrtime';
+import debug from 'debug';
 
+
+// Only output when ENV has DEBUG=senio-simple-motion:test
 const dT = () => {
   let t0 = process.hrtime();
   return (label) => {
-    console.info(label, prettyHrtime(process.hrtime(t0)));
+    debug('senio-simple-motion:test')(label, prettyHrtime(process.hrtime(t0)));
     t0 = process.hrtime();
   };
 };
@@ -77,12 +80,12 @@ const sub = (im1, im2, cb) => {
       // 2 channels is a grayscale image with an alpha channel.
       // 3 channels is an RGB image.
       // 4 channels is an RGBA image (with an alpha channel).
+
+      // Using the raw buffer is about a thousand times faster
       const p1 = raw1[(x + (y*w))];
       const p2 = raw2[(x + (y*w))];
-
       // const p1 = im1.getPixel(x, y).r;
       // const p2 = im2.getPixel(x, y).r;
-
       pixels.push(Math.abs(Math.round(p2 - p1)));
     }
   }
@@ -93,9 +96,6 @@ const sub = (im1, im2, cb) => {
     return acc;
   }, 0)/pixels.length*100;
 
-  // cb(null, {
-  //   percentage,
-  // });
   lwip.open(new Buffer(pixels), {width: w, height: h}, (err, image) => {
     cb(err, {
       image,
@@ -105,12 +105,16 @@ const sub = (im1, im2, cb) => {
 };
 
 const testResource = (filename) => {
-  path.join(__dirname, '..', 'resources', filename);
+  return path.join(__dirname, '..', 'resources', filename);
+};
+
+const testOutput = (filename) => {
+  return path.join(__dirname, '..', 'output', filename);
 };
 
 describe('diff', () => {
 
-  it.only('calculates percentage', function(done) {
+  it('calculates percentage', function(done) {
     this.timeout(10000);
 
     const whites = [0, 10, 25, 50, 100];
@@ -130,7 +134,7 @@ describe('diff', () => {
         }, cb);
       },
       (buffers, cb) => {
-        t0('read files:');
+        t0('read:');
         async.map(buffers, (buf, cb) => {
           prep(buf, cb);
         }, cb);
@@ -160,7 +164,7 @@ describe('diff', () => {
 
   });
 
-  it('temp', (done) => {
+  it('can create grayscale & diff images', (done) => {
     const b1 = fs.readFileSync(testResource('m200_a.jpg'));
     const b2 = fs.readFileSync(testResource('m200_b.jpg'));
 
@@ -178,10 +182,7 @@ describe('diff', () => {
         async.parallel([
           (cb) => {
             async.map(results.map((r, i) => ({image: r, i})), (obj, cb) => {
-              const w = obj.image.width();
-              const h = obj.image.height();
-              console.log(w, h);
-              obj.image.writeFile(`tmp${obj.i}.png`, 'png', cb);
+              obj.image.writeFile(testOutput(`tmp${obj.i}.png`), 'png', cb);
             }, cb);
           },
           (cb) => {
@@ -190,8 +191,7 @@ describe('diff', () => {
                 sub(results[0], results[1], cb);
               },
               (result, cb) => {
-                console.log(result.percentage);
-                result.image.writeFile(`diff.png`, 'png', cb);
+                result.image.writeFile(testOutput(`diff.png`), 'png', cb);
               },
             ], cb);
           },

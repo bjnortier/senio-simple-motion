@@ -29,6 +29,7 @@
   "homepage": "https://github.com/bjnortier/senio-simple-motion#readme",
   "dependencies": {
     "async": "^2.0.1",
+    "debug": "^2.2.0",
     "image-type": "^2.1.0",
     "lwip": "0.0.9",
     "pretty-hrtime": "^1.0.2"
