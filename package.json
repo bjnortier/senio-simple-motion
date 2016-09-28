@@ -6,8 +6,11 @@
   "scripts": {
     "eslint": "eslint .",
     "eslint:watch": "eslint run-script sass -- --eslint",
-    "test": "npm run eslint && jest",
-    "test:watch": "npm run test -- --watch"
+    "unit": "mocha --compilers js:babel-register --recursive test/unit/**",
+    "unit:watch": "npm run unit -- --watch",
+    "functional": "mocha --compilers js:babel-register --recursive test/functional/**",
+    "functional:watch": "npm run functional -- --watch",
+    "test": "npm run eslint && npm run unit && npm run functional"
   },
   "repository": {
     "type": "git",
@@ -25,13 +28,21 @@
   },
   "homepage": "https://github.com/bjnortier/senio-simple-motion#readme",
   "dependencies": {
-    "lwip": "0.0.9"
+    "async": "^2.0.1",
+    "image-type": "^2.1.0",
+    "lwip": "0.0.9",
+    "pretty-hrtime": "^1.0.2"
   },
   "devDependencies": {
     "async": "^2.0.1",
-    "babel-jest": "^15.0.0",
+    "babel-plugin-transform-css-import-to-string": "0.0.2",
+    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
     "eslint": "^3.6.0",
-    "jest": "^15.1.1"
+    "eslint-plugin-mocha": "^4.5.1",
+    "expect": "^1.20.2",
+    "mocha": "^3.1.0"
   }
 }

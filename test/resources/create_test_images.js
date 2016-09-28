@@ -26,7 +26,7 @@ const async = require('async');
       }
     },
     (image, cb) => {
-      image.writeFile(`./test_black_${blackPercentage}_white_${whitePercentage}.png`, 'png', cb);
+      image.writeFile(`./test_${whitePercentage}.png`, 'png', cb);
     },
   ], (err) => {
     if (err) {
