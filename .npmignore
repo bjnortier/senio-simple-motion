@@ -1,0 +1,6 @@
+test/
+src/
+.babelrc
+.eslintrc.json
+.gitignore
+.npmignore
