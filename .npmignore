@@ -4,3 +4,4 @@ src/
 .eslintrc.json
 .gitignore
 .npmignore
+.gitattributes

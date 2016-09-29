@@ -1,5 +1,7 @@
 lib/
 node_modules/
-test/output/*
+test/output/*.jpg
+test/output/*.png
+test/output/sequence/*.jpg
 .DS_Store
 npm-debug.log
