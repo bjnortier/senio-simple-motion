@@ -14,9 +14,6 @@
     },
     "sourceType": "module"
   },
-  "plugins": [
-    "mocha"
-  ],
   "rules": {
     "indent": [
       "error",
