@@ -44,7 +44,7 @@ describe('sequence', () => {
               cb(err);
             } else {
               console.log('%', subResult.percentage);
-              if (subResult.percentage > threshold) {
+              if (subResult.percentage >= threshold) {
                 acc.push(image);
               }
               cb(null, acc);
