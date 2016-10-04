@@ -1,0 +1,52 @@
+{
+  "name": "senio-simple-motion",
+  "version": "1.0.0",
+  "description": "Very simple image motion detection using lwip",
+  "main": "lib/index.js",
+  "scripts": {
+    "eslint": "eslint .",
+    "eslint:watch": "eslint run-script sass -- --eslint",
+    "unit": "mocha --compilers js:babel-register --recursive test/unit/**",
+    "unit:watch": "npm run unit -- --watch",
+    "clear-output": "rm -rf test/output && mkdir -p test/output/sequence",
+    "functional": "npm run clear-output && mocha --compilers js:babel-register --recursive test/functional/**",
+    "functional:watch": "npm run functional -- --watch",
+    "test": "npm run eslint && npm run unit && npm run functional",
+    "compile": "node_modules/babel-cli/bin/babel.js --optional runtime -d lib/ src/",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjnortier/senio-simple-motion.git"
+  },
+  "keywords": [
+    "motion",
+    "detection",
+    "lwip"
+  ],
+  "author": "Ben Nortier <ben@bjnortier.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bjnortier/senio-simple-motion/issues"
+  },
+  "homepage": "https://github.com/bjnortier/senio-simple-motion#readme",
+  "dependencies": {
+    "async": "^2.0.1",
+    "debug": "^2.2.0",
+    "image-type": "^2.1.0",
+    "lwip": "0.0.9",
+    "pretty-hrtime": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-plugin-transform-css-import-to-string": "0.0.2",
+    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.16.3",
+    "eslint": "^3.6.1",
+    "expect": "^1.20.2",
+    "mocha": "^3.1.0"
+  }
+}
