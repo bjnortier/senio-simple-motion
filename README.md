@@ -1,3 +1,3 @@
 # senio-simple-motion
 
-Very simple image motion detection using lwip.
+DEPRECATED in favor of jimp.hash and jimp.diff
